@@ -1,0 +1,373 @@
+<!doctype html>
+
+<html>
+
+<head>
+   <title>An Intro to Ext JS</title>
+
+   <link rel="stylesheet" href="slides.css">
+   <link rel="stylesheet" href="codemirror.css">
+
+   <script src="jquery-1.8.1.min.js"></script>
+   <script src="fathom.min.js"></script>
+   <script src="codemirror.js"></script>
+   <script src="javascript.js"></script>
+   <script>
+      $(function() {
+         var fathom = $('#slides').fathom();
+
+         $.each($(".codez"), function (i, item) {
+            CodeMirror.fromTextArea(item, {
+               lineNumbers: true,
+               matchBrackets: true
+            });
+         })
+      });
+   </script>
+   <script>
+   </script>
+</head>
+
+<body>
+   <div id="slides">
+
+      <div class="slide slide-title">
+         <header>
+            <h1>An Intro to Ext JS</h1>
+            <h2>
+               Presented by<br />
+               Chris Missal
+            </h2>
+         </header>
+         <p>September 21st, 2012</p>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Plan for the Next Hour</h1>
+         </header>
+         <ul>
+            <li>An explanation on Ext JS</li>
+            <li>A quick history lesson</li>
+            <li>Comparison to other JS libraries</li>
+            <li>How to build</li>
+            <li>A Bowling App Demo</li>
+            <li>Pros and Cons</li>
+            <li>Q&amp;A</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>What is Ext JS?</h1>
+         </header>
+         <p>Ext JS (pronounced E-X-T-J-S) is a pure
+            JavaScript application framework for
+            building interactive web applications.<br /></p>
+         <h2>Featuring</h2>
+         <ul>
+            <li>AJAX</li>
+            <li>Drag&amp;Drop</li>
+            <li>Charting</li>
+            <li>Kitchen Sinks</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>History</h1>
+         </header>
+         <ul>
+            <li>Started as YUI extensions</li>
+            <li>Versions 2 and 3 from 2007 to 2009</li>
+            <li>Joined with with JQTouch and Rapha&euml;l
+               to form Sencha in 2010</li>
+            <li>See also Sencha Touch (use w/ PhoneGap)</li>
+            <li>Current Ext JS 4 since 2011</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Competitors</h1>
+         </header>
+         <h2>Direct</h2>
+         <ul>
+            <li>jQuery UI <small>http://jqueryui.com</small></li>
+            <li>Dojo <small>http://dojotoolkit.org</small></li>
+            <li>Kendo UI <small>http://kendoui.com</small></li>
+         </ul>
+         <h2>Related</h2>
+         <ul>
+            <li>Backbone <small>http://backbonejs.org</small></li>
+            <li>Knockout <small>http://knockoutjs.com</small></li>
+         </ul>
+      </div>
+
+      <div class="slide slide-subtitle">
+         <header>
+            <h1>Let's Build</h1>
+         </header>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Building Blocks</h1>
+         </header>
+         <ul>
+            <li>Everything is a &quot;container&quot;
+               or a &quot;component&quot;</li>
+            <li>Favors <em>extension</em> and <em>composition</em>
+               more than functional patterns</li>
+            <li>Files look more like configuration
+               files than JS files</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Ext JS Example Code</h1>
+         </header>
+         <h2>Defining Hidden</h2>
+         <p><small>Ext.form.field.Hidden.js</small></p>
+         <section class="code-example">
+            <textarea class="codez">Ext.define('Ext.form.field.Hidden', {
+    extend:'Ext.form.field.Base',
+    alias: ['widget.hiddenfield', 'widget.hidden'],
+    alternateClassName: 'Ext.form.Hidden',
+
+    // private
+    inputType : 'hidden',
+    hideLabel: true,
+    
+    initComponent: function(){
+        this.formItemCls += '-hidden';
+        this.callParent();    
+    },
+    
+    /**
+     * @private
+     * Override. Treat undefined and null values as equal to an empty string value.
+     */
+    isEqual: function(value1, value2) {
+        return this.isEqualAsString(value1, value2);
+    }
+
+    // ...
+});</textarea>
+         </section>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>More Example Code</h1>
+         </header>
+         <h2>How to use Hidden</h2>
+         <p><small>MyApp.controls.CompositeKey.js</small></p>
+         <section class="code-example">
+            <textarea class="codez">Ext.define('MyApp.controls.CompositeKey', {
+    extend:'Ext.container.Container',
+    alias: ['widget.compositekey'],
+
+    keyTwo: Ext.create('Ext.form.field.Hidden', { name: 'key2' }),
+
+    initComponent: function() {
+        var me = this;
+
+        me.items = [{ // first item is xtype
+            xtype: 'hiddenfield',
+            name: 'key1'
+        }, keyTwo]; // second item is private instance
+
+        me.callParent(arguments); // call to base class with args
+    }
+});</textarea>
+         </section>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Extending Components</h1>
+         </header>
+         <h2>&quot;Config&quot; all the things!</h2>
+         <ul>
+            <li>Calls to parents will use Ext.Apply<br />
+               <small>Ext.apply(receivingObject, sendingObject, defaults)</small></li>
+            <li>Hindered discoverability (personally)</li>
+            <li>Makes documentation important</li>
+            <li>Pro Tip: Use similar naming as Ext</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Common Conventions</h1>
+         </header>
+         <ul>
+            <li>&quot;this&quot; is often re-scoped</li>
+            <li>Naming should be consistent<br />
+               <small>Including files, folders and namespaces</small>
+               </li>
+            <li>When to use callParent</li>
+            <li>Wrap in a self calling anonymous<br />method, or don't</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Documentation</h1>
+         </header>
+         <ul>
+            <li>Docs are pretty</li>
+            <li>They're also pretty good</li>
+            <li>What you're looking for probably has comments</li>
+            <li><a href="http://docs.sencha.com/ext-js/4-1/#/api" target="newtab">http://docs.sencha.com/ext-js/4-1/</a></li>
+         </ul>
+      </div>
+
+      <!-- The Bowling App -->
+
+      <div class="slide slide-subtitle">
+         <header>
+            <h1>The Bowling App</h1>
+         </header>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Store</h1>
+         </header>
+         <h2>Collections of Resources</h2>
+         <ul>
+            <li>Arrays, sets, tables, etc</li>
+            <li>Can be dirty or saved on the fly</li>
+         </ul>
+         <h2>Request/Response</h2>
+         <ul>
+            <li>JSON or XML</li>
+            <li>Server communication is dead simple</li>
+            <li>RESTful!</li>
+         </ul>
+         <p><em>... Let's look at Teams</em></p>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Model</h1>
+         </header>
+         <h2>Entities</h2>
+         <ul>
+            <li>Flat objects are simple</li>
+            <li>Associations can get complex</li>
+            <li>Supports validations and functions</li>
+         </ul>
+         <h2>Active Record-ish</h2>
+         <ul>
+            <li>Can know about their endpoint</li>
+            <li>Proxy is very slick</li>
+         </ul>
+         <p><em>... Let's look at Bowlers</em></p>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Windows and Wizards</h1>
+         </header>
+         <ul>
+            <li>Out of box simple like most</li>
+            <li>Employ a card panel with little effort</li>
+            <li>Some extra validation and boom</li>
+         </ul>
+         <p><em>... Let's add a series</em></p>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Model/View/Controller</h1>
+         </header>
+         <ul>
+            <li>Optional architecture </li>
+            <li>New in Ext 4</li>
+            <li>Interesting approach with<br />
+               CSS selectors in Controller</li>
+         </ul>
+         <p><em>... Let's look at the code</em></p>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>SVG and VML</h1>
+         </header>
+         <ul>
+            <li>Another new piece of Ext 4</li>
+            <li>SVG Drawing</li>
+            <li><a href="http://dev.sencha.com/deploy/ext-4.1.0-gpl/examples/draw/Sencha.html" target="newtab">Resizeable Sencha Logo</a></li>
+            <li><a href="http://dev.sencha.com/deploy/ext-4.1.0-gpl/examples/charts/FormDashboard.html" target="newtab">Dashboard Demo with Chart</a></li>
+            <li>No charting in the bowling app... <em>yet!</em></li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Pros and Cons</h1>
+         </header>
+         <h2>The Cons</h2>
+         <ul>
+            <li>Debugging is terrible <small>Find some good tools!</small></li>
+            <li>Caching = undefined <small>Try <a href="https://chrome.google.com/webstore/detail/cppjkneekbjaeellbfkmgnhonkkjfpdn" taraget="newtab">Clear Cache</a></small></li>
+            <li>Know your version when Googling</li>
+            <li>Layout is weird <small>one of a kind, I think...</small></li>
+            <li>Themes/styling are tough <small>for me</small></li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Pros and Cons</h1>
+         </header>
+         <h2>The Pros</h2>
+         <ul>
+            <li>UI is extremely rich</li>
+            <li>Loads of extensibility and events</li>
+            <li>Paid support if needed</li>
+            <li>Very fast after initial learning curve</li>
+         </ul>
+      </div>
+
+      <div class="slide">
+         <header>
+            <h1>Why Ext?</h1>
+         </header>
+         <ul>
+            <li>Why should we care?</li>
+            <li>Why not jQuery?</li>
+            <li>How does this help us?</li>
+         </ul>
+         <h2>My thoughts</h2>
+         <ul>
+            <li>Collect more tools and patterns</li>
+            <li>Pick your poison</li>
+            <li>Ext and Sencha's focus on mobile</li>
+         </ul>
+      </div>
+
+      <!-- End Slide -->
+
+      <div class="slide slide-title">
+         <header>
+            <h1>Thank You!</h1>
+         </header>
+         <p style="text-align:center;padding-bottom:1ex;">
+            Questions, go!
+         </p>
+         <h2>Cast and Crew</h2>
+         <ul>
+            <li>Director/Narrator - Chris Missal</li>
+            <li>Key Grip - Tim Thomas (slides)</li>
+         </ul>
+      </div>
+
+   </div>
+</body>
+
+</html>
