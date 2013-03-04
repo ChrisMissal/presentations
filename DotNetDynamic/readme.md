@@ -18,6 +18,8 @@
 * Big deal when implementing is TryInvokeMember() and TryGetMember()
  * Look for other overrides that could be useful
 * Be sure to show the "hack" that lets Formo read generics
+* Using dynamic around process boundaries
+* Using dynamic in views
 
 ### Freddie Benefits
 
