@@ -5,13 +5,20 @@
 ## Rough Agenda
 
 1. What is it, how do you use it?
-2. Quick story on how it was added to the runtime(?)
-3. Pros/Cons
-4. When to use it, when not to use it.
-5. Real world examples
-6. How it's used in Freddie
-7. How it's used in Formo
-8. Why the usage in Formo is a good idea and should be adopted in new projects
+1. Quick story on how it was added to the runtime(?)
+1. Pros/Cons
+  * Pros
+      1. can be defined at runtime
+      1. schema can change without dependencies changing in other libraries or views
+  * Cons
+      1. can fail hard at runtime
+      1. you lose some type checking, intellisense, etc
+      1. performance can be an issue, use wisely
+1. When to use it, when not to use it.
+1. Real world examples
+1. How it's used in Freddie
+1. How it's used in Formo
+1. Why the usage in Formo is a good idea and should be adopted in new projects
 
 ## Notes
 
