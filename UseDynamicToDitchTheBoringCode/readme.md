@@ -27,6 +27,7 @@
 * Be sure to show the "hack" that lets Formo read generics
 * Using dynamic around process boundaries
 * Using dynamic in views
+ * Con: with dynamic in your views, you can't use Linq methods like `.Any()`, you need to create `.HasProducts` for example
 
 ### Freddie Benefits
 
