@@ -28,6 +28,7 @@
 * Using dynamic around process boundaries
 * Using dynamic in views
  * Con: with dynamic in your views, you can't use Linq methods like `.Any()`, you need to create `.HasProducts` for example
+ * Pro: keeps your viewmodels from becoming too large. I like to add a few properties to an Expando, but know that I need to rethink the schema when I'm adding too many
 
 ### Freddie Benefits
 
