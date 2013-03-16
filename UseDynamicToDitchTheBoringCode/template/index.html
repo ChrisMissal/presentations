@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Use Dynamic to Ditch the Boring Code</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		#Cover h2 {
+			margin:65px 0 0;
+			color:#389AEB;
+			text-align:center;
+			font-size:70px;
+			text-shadow: 0px 2px 2px rgba(64, 64, 64, 0.9);
+			}
+		#Formo {
+			background-color: #D2C9B9;
+		}
+		#Formo h2 {
+			color:#FFF;
+			}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Use Dynamic to Ditch the Boring Code</h1>
+		<p><a href="http://chrismissal.com">Chris Missal</a></p>
+	</header>
+
+	<section class="slide cover" id="Cover"><div>
+		<h2>Use Dynamic to Ditch the Boring Code</h2>
+		<img src="pictures/running.jpg" alt="">
+	</div></section>
+	<section class="slide"><div><!-- =============================================== AGENDA - WAIT?! DYNAMIC IN .NET -->
+		<h2>Agenda</h2>
+		<ol>
+			<li>Wait?! Dynamic in .Net?</li>
+			<li>How does it work?</li>
+			<li>When to use it</li>
+			<li>When to avoid it</li>
+			<li>Examples and samples</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Dynamic in .Net</h2>
+		<p>TODO: The concept of dynamic in .Net has been around since 01/01/0001.</p>
+		<ul>
+			<li>TODO: DLR</li>
+			<li>TODO: Other langs</li>
+			<li>TODO: C#</li>
+			<li>TODO: Something with LINQ and anonymous objects</li>
+		</ul>
+	</div></section>
+
+
+
+
+
+
+
+
+
+
+	<section class="slide"><div><!-- =============================================== AGENDA - HOW DOES IT WORK? -->
+		<h2>Agenda</h2>
+		<ol>
+			<li>Wait?! Dynamic in .Net?</li>
+			<li><strong>How does it work?</strong></li>
+			<li>When to use it</li>
+			<li>When to avoid it</li>
+			<li>Examples and samples</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>TODO: Show ExpandoObject</h2>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>TODO: Show DynamicObject</h2>
+		<ul>
+			<li>TryGetMember and TryInvokeMember</li>
+		</ul>
+	</div></section>
+
+
+
+
+
+
+
+
+
+
+	<section class="slide"><div><!-- =============================================== AGENDA - WHEN TO USE IT -->
+		<h2>Agenda</h2>
+		<ol>
+			<li>Wait?! Dynamic in .Net?</li>
+			<li>How does it work?</li>
+			<li><strong>When to use it</strong></li>
+			<li>When to avoid it</li>
+			<li>Examples and samples</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>When to use it</h2>
+		<ul>
+			<li>Process Boundaries</li>
+			<li class="next">HTTP is schemaless</li>
+			<li class="next">Views count!</li>
+		</ul>
+		<footer>
+			When do you want strong typing across processes?
+		</footer>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>A bit more on Views</h2>
+		<ul>
+			<li>Extension methods don't work on dynamic! :tableflip:</li>
+			<li class="next">Good &amp; bad because you can dump a model and learn all the things</li>
+			<li class="next">If you're having a bad time, it's not dynamic's fault</li>
+		</ul>
+	</div></section>
+
+
+
+
+
+
+
+	<section class="slide"><div><!-- =============================================== AGENDA - WHEN TO AVOID IT -->
+		<h2>Agenda</h2>
+		<ol>
+			<li>Wait?! Dynamic in .Net?</li>
+			<li>How does it work?</li>
+			<li>When to use it</li>
+			<li><strong>When to avoid it</strong></li>
+			<li>Examples and samples</li>
+		</ol>
+	</div></section>
+
+
+
+
+
+
+
+
+
+
+	<section class="slide"><div><!-- =============================================== AGENDA - EXAMPLES AND SAMPLES -->
+		<h2>Agenda</h2>
+		<ol>
+			<li>Wait?! Dynamic in .Net?</li>
+			<li>How does it work?</li>
+			<li>When to use it</li>
+			<li>When to avoid it</li>
+			<li><strong>Examples and samples</strong></li>
+		</ol>
+	</div></section>
+
+	<section class="slide cover" id="Formo" data-timing="00:05"><div>
+		<h2>Dynamic Configuration</h2>
+		<img src="pictures/raster.png" alt="">
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Flexible Code + Configuration</h2>
+		<p>Configuration in .Net applications can contain several lines in a file that reference <code>&lt;add key="name" value="stuff"/&gt;</code>. Developers can put all kinds of data in these and getting them out is annoying.</p>
+		<footer>
+			Process boundaries
+		</footer>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Here's how it works:</h2>
+		<h6>Sample app.config</h6>
+		<pre>
+			<code>&lt;add key="<mark>Retries</mark>" value="<mark class="important">5</mark>"/&gt;</code>
+			<code>&lt;add key="<mark>BuildDate</mark>" value="<mark class="important">2012-02-13</mark>/&gt;</code>
+		</pre>
+		<h5>Usage with Formo</h5>
+		<pre>
+			<code>var retries = config.Retries; // or config.Retries(10);</code>
+			<code>DateTime dt = config.BuildDate&lt;DateTime&gt;();
+		</pre>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>Time for<br />real code!</h2>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2><strong>Pros</strong> - Formo benefits from dynamic by:</h2>
+		<ol>
+			<li>Not relying on &quot;magic strings&quot;</li>
+			<li class="next">Getting &quot;some&quot; intellisense</li>
+			<li class="next">Failing gracefully</li>
+			<li class="next">&quot;Guessing&quot; with defaults</li>
+			<li class="next">Being able to leverage strong types</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2><strong>Cons</strong> - Formo is terrible because:</h2>
+		<ol>
+			<li>Dynamic code is slow<sup>&dagger;</sup></li>
+			<li class="next">It's just as bad as &quot;magic strings&quot;</li>
+			<li class="next">Can fail at runtime</li>
+			<li class="next">Type changes can cause issues</li>
+		</ol>
+		<p>&dagger; <em>More on this in a moment...</em></p>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>TODO:<br />Formo perf test</h2>
+		<ul>
+			<li>10,000 iterations of .Bind&lt;Thing&gt; w/ new Configuration</li>
+			<li>10,000 iterations of .Bind&lt;Thing&gt; w/ one Configuration</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Another Project, Freddie</h2>
+		<p>I'd like to talk to an API that lets me send work with an email service provider.</p>
+		<p>All the implementations I can find want me to use a crazy amount of static types.</p>
+		<h5><strong>Dynamic!</strong></h5>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Why Use Dynamic?</h2>
+		<h3><strong>Let's recap:</strong></h3>
+		<ul>
+			<li>It crosses a process boundary</li>
+			<li>HTTP is already dynamic, keep it that way</li>
+			<li>Freddie's should let clients talk to MailChimp and not get in the way</li>
+			<li>Keeps Freddie &quot;ignorant&quot; of the API</li>
+		</ul>
+		<footer>
+			If the API changes by adding new variables, I don't have to recompile the library, consumers can simply
+			add new properties on their anonymous objects.
+		</footer>
+	</div></section>
+
+
+	<section class="slide"><div>
+		<h2>Your homework</h2>
+		<ul>
+			<li>Find a good use for dynamic and put it in production</li>
+			<li>Use Formo, make it better, give me feedback</li>
+		</ul>
+	</div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<section class="slide" data-timing="00:05"><div>
+		<h2>Slide with timer</h2>
+		<p>It will change right in five seconds</p>
+		<footer>
+			Presenter note for the first slide
+		</footer>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Heading</h2>
+		<p>In your slides text you can use <a href="http://google.com/">links</a> and various inline elements for <em>emotional</em> and <strong>strong</strong> emphasis or just for <i>italic</i> or <b>bold</b> decoration. <code>&lt;code&gt;</code> is used for inline code samples.</p>
+		<footer>
+			Presenter note for the second slide
+		</footer>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Two rows.<br> Mighty heading</h2>
+		<p>You can use two lines header but it would reduce space on a slide. The “Ribbon” theme is designed for seven lines of code after one-line header by default.</p>
+		<p class="note">This paragraph could be used as a footnote</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Various lists</h2>
+		<ul>
+			<li>Simple lists are marked with bullets.</li>
+			<li>Ordered lists begin with a number.</li>
+			<li>You can even nest lists one inside another.
+				<ol>
+					<li>Or mix their types.</li>
+					<li>But do not go too far.</li>
+					<li>Otherwise audience will be bored.</li>
+				</ol>
+			</li>
+			<li>Look, seven rows exactly!</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Serious citation</h2>
+		<figure>
+			<blockquote>
+				<p>You can wrap one or more paragraphs into citation, which will make text italic and add a nice quote on the left. Giving the citation source would make it even more serious.</p>
+			</blockquote>
+			<figcaption>Vadim Makeev</figcaption>
+		</figure>
+	</div></section>
+	<section class="slide"><div>
+		<h2>When you have a lot of code</h2>
+		<pre>
+			<code>&lt;html lang="en"&gt;</code>
+			<code><mark>&lt;head&gt;</mark> <mark class="comment">&lt;!--Comment--&gt;</mark></code>
+			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
+			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
+			<code>    &lt;link rel="stylesheet" href="s/screen.css"&gt;</code>
+			<code>    &lt;script src="j/jquery.js"&gt;&lt;/script&gt;</code>
+			<code><mark>&lt;/head&gt;</mark></code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Code in separate blocks</h2>
+		<pre>
+			<code><mark>&lt;html</mark> lang="en"&gt;</code>
+		</pre>
+		<p class="note">Now you can add a note for each block</p>
+		<pre>
+			<code><mark>&lt;meta</mark> charset="<mark>UTF-8</mark>"&gt;</code>
+		</pre>
+		<p class="note">And explain what is interesting about it</p>
+	</div></section>
+	<section class="slide shout"><div>
+		<h2>You can shout<br> this way</h2>
+	</div></section>
+	<section class="slide cover" id="Picture"><div>
+		<h2>And place any picture</h2>
+		<img src="pictures/picture.jpg" alt="">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Inner navigation</h2>
+		<ol>
+			<li>Lets you change objects one by one</li>
+			<li class="next">For example, show list items</li>
+			<li class="next">Or switch pictures</li>
+			<li class="next">And much more</li>
+			<li class="next">But it will work only once</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Thanks!</h2>
+		<p>Chris Missal, Headspring</p>
+		<ul>
+			<li><a href="http://chrismissal.lostechies.com">chrismissal.lostechies.com</a></li>
+			<li><a href="http://twitter.com/chrismissal">twitter.com/ChrisMissal</a></li>
+			<li><a href="http://github.com/chrismissal">github.com/ChrisMissal</a></li>
+			<li><a href="mailto:chris.missal@gmail.com">chris.missal@gmail.com</a></li>
+		</ul>
+	</div></section>
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+</body>
+</html>
