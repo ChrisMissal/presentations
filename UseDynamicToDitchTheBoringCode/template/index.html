@@ -23,6 +23,27 @@
 		#Formo h2 {
 			color:#FFF;
 			}
+		.alternate-titles {
+			font-size: 40%;
+		}
+		.alternate-titles li {
+			float: left; display: inline-block; padding: 5px; margin-right: 10px;
+		}
+		.nuget-badge code {
+			background-color: #202020 !important;
+			border: 4px solid silver;
+			border-bottom-left-radius: 5px 5px;
+			border-bottom-right-radius: 5px 5px;
+			border-top-left-radius: 5px 5px;
+			border-top-right-radius: 5px 5px;
+			color: #E2E2E2;
+			display: block;
+			font: normal normal normal 1.5em/small 'andale mono', 'lucida console', monospace;
+			line-height: 1.5em;
+			overflow: auto;
+			padding: 15px;
+		}
+
 	</style>
 </head>
 <body class="list">
@@ -35,6 +56,43 @@
 		<h2>Use Dynamic to Ditch the Boring Code</h2>
 		<img src="pictures/running.jpg" alt="">
 	</div></section>
+
+<section class="slide"><div>
+	<h2>A.K.A.</h2><ul class="alternate-titles">
+<li>"It's about dynamic, go!"
+<li>dynomagic in c#
+<li>Thermodynamic
+<li>dynamic: "I can't believe it's not strongly typed!"
+<li>Can't Believe It's Not Object
+<li>dynamic eye for a static guy
+<li>use dynamic more betterer!?
+<li>I &lt;3 Dynamic
+<li>An Engaging and Entertaining Presentation on When the Dynamic Type Is a Value-added Proposition To Your Current and Future Coding Endeavors and Some Examples of When the Dynamic Type is Not-So-Useful.
+<li>dynamic: when you're tired of the compiler helping you but don't feel like writing python?
+<li>Are you being Dynamic enough?
+<li>How To Pad Your Resume with Liberal Use of the Dynamic Type?
+<li>Dynomutt!
+<li>Dynamic and The Crystal Skulls
+<li>I don't always use types, but when I do, I prefer dynamic.
+<li>Never found a good use for dynamic in C#? Formo again
+<li>Become a Dynamo at Dynamic
+<li>Expando Your Dynamic Skills
+<li>the good, the bad, and the dynamic
+<li>Dynamic is DYN-O-MITE!
+<li>Chris's Brown Bag on Dynamic
+<li>"Dynamic - An Announcement to Commence to Begin an Introduction to a Primer on Using Dynamic in .NET" -- a _highly advanced_ discussion about dynamic
+<li>"The Fantastical Chris Missal and his Flontifluous Giantastical Dynamic Brownbag-o-matic!"
+<li>Learnings dynamic for Make Benefit Glorious Nation of Kazakhstan
+<li>Bag
+<li>BB
+<li>_
+<li>.
+<li>;
+<li>dynamic presentation = Awesome.And().Cool();
+<li>dynamic brownBag = new AwesomePresentation() { By = "Chris" }
+</ul>
+</div></section>
+
 	<section class="slide"><div><!-- =============================================== AGENDA - WAIT?! DYNAMIC IN .NET -->
 		<h2>Agenda</h2>
 		<ol>
@@ -47,13 +105,12 @@
 	</div></section>
 
 	<section class="slide"><div>
-		<h2>Dynamic in .Net</h2>
-		<p>TODO: The concept of dynamic in .Net has been around since 01/01/0001.</p>
+		<h2>Dynamic in .NET</h2>
+		<p>The concept of dynamic in .NET (DLR) has been around since Nov/Dec 2008.</p>
 		<ul>
-			<li>TODO: DLR</li>
-			<li>TODO: Other langs</li>
-			<li>TODO: C#</li>
-			<li>TODO: Something with LINQ and anonymous objects</li>
+			<li>Stable release - 1.0 on April 2010</li>
+			<li>IronRuby, IronPython, (Powershell 3, IronScheme)</li>
+			<li>C# 4.0 introduced the dynamic keyword</li>
 		</ul>
 	</div></section>
 
@@ -78,14 +135,35 @@
 	</div></section>
 
 	<section class="slide"><div>
-		<h2>TODO: Show ExpandoObject Example</h2>
+		<h2>ExpandoObject Example</h2>
+		<pre>
+			<code>dynamic student = new ExpandoObject();
+student.FirstName = "Jeff";
+student.LastName = "Lebowski";</code>
+		</pre>
 	</div></section>
 
 	<section class="slide"><div>
-		<h2>TODO: Show DynamicObject</h2>
-		<ul>
-			<li>TryGetMember and TryInvokeMember Example</li>
-		</ul>
+		<h2>DynamicObject Example</h2>
+		<pre>
+			<code>public class SampleDynamicObject : <mark>DynamicObject</mark> { }
+// ...
+dynamic sampleObject = new SampleDynamicObject ();
+// ...
+public override bool <mark>TryGetMember</mark>(
+    GetMemberBinder binder, out object result)
+public override bool <mark>TrySetMember</mark>(
+    SetMemberBinder binder, object value)</code>
+		</pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>DynamicObject (continued)</h2>
+		<pre>
+			<code>public override object <mark>TryInvokeMember</mark>(
+	InvokeMemberBinder binder, object[] args,
+	out object result)</code>
+		</pre>
 	</div></section>
 
 
@@ -113,23 +191,26 @@
 		<ul>
 			<li>Process Boundaries</li>
 			<li class="next">HTTP is schemaless</li>
-			<li class="next">Views count!</li>
+			<li class="next">How about Views?</li>
 		</ul>
-		<footer>
-			When do you want strong typing across processes?
-		</footer>
 	</div></section>
 
 	<section class="slide"><div>
 		<h2>A bit more on Views</h2>
 		<ul>
-			<li>Extension methods don't work on dynamic! :tableflip:</li>
+			<li>Extension methods don't work on dynamic! (╯°□°）╯︵ ┻━┻</li>
 			<li class="next">Good &amp; bad because you can dump a model and learn all the things</li>
 			<li class="next">If you're having a bad time, it's not dynamic's fault</li>
 		</ul>
 	</div></section>
 
-
+	<section class="slide"><div>
+		<h2>Think outside the box</h2>
+		<ul>
+			<li>Dynamic Specifications - My discounts idea...</li>
+			<li class="next">What are your ideas?</li>
+		</ul>
+	</div></section>
 
 
 
@@ -152,7 +233,6 @@
 			<li>DTOs == good, anything else == bad</li>
 			<li>Programming to an interface</li>
 			<li>If performance is an issue</li>
-			<li>TODO: "When to avoid dynamic in .Net" on google</li>
 		</ul>
 	</div></section>
 
@@ -182,9 +262,6 @@
 	<section class="slide"><div>
 		<h2>Flexible Code + Configuration</h2>
 		<p>Configuration in .Net applications can contain several lines in a file that reference <code>&lt;add key="name" value="stuff"/&gt;</code>. Developers can put all kinds of data in these and getting them out is annoying.</p>
-		<footer>
-			Process boundaries
-		</footer>
 	</div></section>
 
 	<section class="slide"><div>
@@ -219,7 +296,7 @@
 	<section class="slide"><div>
 		<h2><strong>Cons</strong> - Formo is terrible because:</h2>
 		<ol>
-			<li>Dynamic code is slow<sup>&dagger;</sup></li>
+			<li>Dynamic code can be slow<sup>&dagger;</sup></li>
 			<li class="next">It's just as bad as &quot;magic strings&quot;</li>
 			<li class="next">Can fail at runtime</li>
 			<li class="next">Type changes can cause issues</li>
@@ -228,13 +305,8 @@
 	</div></section>
 
 	<section class="slide shout"><div>
-		<h2>TODO:<br />Formo perf test</h2>
-		<footer>
-			<ul>
-				<li>10,000 iterations of .Bind&lt;Thing&gt; w/ new Configuration</li>
-				<li>10,000 iterations of .Bind&lt;Thing&gt; w/ one Configuration</li>
-			</ul>
-		</footer>
+		<h2><br />Performance</h2>
+		<img src="pictures/perf.png" alt="Performance" style="width:800px;" />
 	</div></section>
 
 	<section class="slide"><div>
@@ -253,23 +325,21 @@
 			<li>Freddie's should let clients talk to MailChimp and not get in the way</li>
 			<li>Keeps Freddie &quot;ignorant&quot; of the API</li>
 		</ul>
-		<footer>
-			If the API changes by adding new variables, I don't have to recompile the library, consumers can simply
-			add new properties on their anonymous objects.
-		</footer>
 	</div></section>
 
 
 	<section class="slide"><div>
-		<h2>Your homework</h2>
+		<h2>Your (optional) homework</h2>
 		<ul>
 			<li>Find a good use for dynamic and put it in production</li>
 			<li>Use Formo, make it better, give me feedback</li>
+			<li><a href="http://chrismissal.github.com/Formo/">http://chrismissal.github.com/Formo</a></li>
 		</ul>
+		<pre class="nuget-badge"><code>  PM> Install-Package Formo</code></pre>
 	</div></section>
 
 	<section class="slide"><div>
-		<h2>Thanks!</h2>
+		<h2>Thanks! Questions?</h2>
 		<p>Chris Missal, Headspring</p>
 		<ul>
 			<li><a href="http://chrismissal.lostechies.com">chrismissal.lostechies.com</a></li>
@@ -285,7 +355,7 @@
 
 
 
-
+<!-- 
 
 
 
@@ -375,7 +445,7 @@
 			<li class="next">And much more</li>
 			<li class="next">But it will work only once</li>
 		</ol>
-	</div></section>
+	</div></section>-->
 
 	<!--
 		To hide progress bar from entire presentation
