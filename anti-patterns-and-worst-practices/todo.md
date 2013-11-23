@@ -1,5 +1,12 @@
-
 Items to do for certain chapters:
+
+## Chapter 1
+
+why these topics are important
+
+## Chapter 2
+
+benefits
 
 ## Chapter 3
 
@@ -9,4 +16,10 @@ Items to do for certain chapters:
 - Spellchecks, ensure consistent naming/spelling
 - Consistent code formatting, code highlighting in paragrahs
 
+## Chapter 4
 
+New content
+
+## Chapter 5
+
+where to go next and general conclusion stuff
