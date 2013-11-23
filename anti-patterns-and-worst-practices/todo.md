@@ -15,6 +15,7 @@ benefits
 - General text proofread, voice, and tone changes
 - Spellchecks, ensure consistent naming/spelling
 - Consistent code formatting, code highlighting in paragrahs
+- Change "recently" wording to something more appropriate
 
 ## Chapter 4
 
