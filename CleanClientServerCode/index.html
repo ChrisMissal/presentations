@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Clean Clients &amp; Smart Servers</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Chris's Extras -->
+  <link rel="stylesheet" href="extra/extensions.css">
+  <link rel="stylesheet" href="extra/prism-coy.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h1>Clean<br />Client/Server<br />Code</h1>
+    </section>
+
+    <section class="slide">
+      <h2>About Me</h2>
+      <ul>
+        <li>
+          <h4>Chris Missal</h4>
+          <ul>
+            <li>Twitter: <a href="http://twitter.com/ChrisMissal">@ChrisMissal</a></li>
+            <li>GitHub: <a href="http://github.com/ChrisMissal">ChrisMissal</a></li>
+            <li>Website: <a href="http://chrismissal.com">www.chrismissal.com</a></li>
+            <li>GitHub: <a href="mailto:chris.missal@gmail.com">chris.missal@gmail.com</a></li>
+          </ul>
+        <li>
+          <h4>At <a href="http://www.headspring.com">Headspring</a> in Austin, TX</h4>
+          <ul>
+            <li>Senior Consultant IV</li>
+            <li>Directory of Open Source Software</li>
+            <li>Birthday Club President</li>
+          </ul>
+        </li>
+        <li>
+          <h4>Likes, Loves, and Favorites</h4>
+          <ul>
+            <li>Likes: Bowling, disc golf</li>
+            <li>Loves: Writing code, potato salad</li>
+            <li>Favorites: C# and JavaScript</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Why are you here?</h2>
+      <ul>
+        <li><h4>Write better JavaScript</h4></li>
+        <li><h4>Write less JavaScript (or is it fewer JavaScripts?)</h4></li>
+        <li><h4>Forget what you know about CSS</h4></li>
+        <li><h4>Build better APIs for front-enders</h4></li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Front End Problems</h2>
+      <ul>
+        <li class="slide"><h4>Brittle</h4></li>
+        <li class="slide"><h4>Hard to follow/discover</h4></li>
+        <li class="slide"><h4>Afraid to change or upgrade</h4></li>
+        <li class="slide"><h4>Lots of dead code</h4></li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Agenda</h2>
+      <ol>
+        <li><h4>Writing and structuring CSS better</h4></li>
+        <li><h4>JavaScript that reacts to workflow instead of guiding it</h4></li>
+        <li><h4>How to drive client code with well written server code</h4></li>
+      </ol>
+    </section>
+
+    <section class="slide">
+      <h2>CSS Troubles</h2>
+      <img src="images/css.gif" height="100%" width="100%" />
+    </section>
+
+    <section class="slide">
+      <h2>StyleSheets != CSS</h2>
+      <div class="slide">
+        <h4>CSS != XPath</h4>
+        <p>Bad:</p>
+        <pre><code class="language-css">.student-list li.active a { text-decoration: none; }</pre></code>
+        <p>Good:</p>
+        <pre><code class="language-css">a.active-student-link { text-decoration: none; }</pre></code>
+      </div>
+      <div class="slide">
+        <h4>Poor separation</h4>
+        <p>Mixing typography, colors, position, layout...</p>
+      </div>
+      <div class="slide">
+        <h4>Brittle</h4>
+        <p>As Peter showed us.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Files</h2>
+      <h4>Project Structure</h4>
+      <ul>
+        <li>Content</li>
+        <ul>
+          <li>css
+            <ul>
+              <li>vendor</li>
+              <li>states</li>
+              <li>custom</li>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+      <div class="slide">
+        <h4>GZip, Bundle, Minify, Cookieless</h4>
+        <p>Right away, first thing, always...</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Files (continued)</h2>
+      <div class="slide">
+        <h4>Serving Files (bad)</h4>
+        <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/vendor/bootstrap/bootstrap.css"&gt;
+&lt;link rel="stylesheet" href="/content/css/custom/layout.css"&gt;
+&lt;link rel="stylesheet" href="/content/css/custom/typography.css"&gt;</code></pre>
+      </div>
+      <div class="slide">
+        <h4>Bundling (good)</h4>
+        <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/all.css"&gt;</pre></code>
+      </div>
+      <div class="slide">
+        <h4>Bundling w/ cache buster (good)</h4>
+        <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/all.css?_=238750958"&gt;</pre></code>
+      </div>
+      <div class="slide">
+        <h4>Bundling per version (best)</h4>
+        <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/238d9b6/css/all.css"&gt;</pre></code>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Cascading<sup>1</sup> Style Sheets</h2>
+      <pre><code class="language-markup">&lt;div id="door" class="opened"&gt;
+  &lt;img src="icon-open.png" class="icon open" /&gt;
+  &lt;img src="icon-close.png" class="icon close" /&gt;
+  ...
+&lt;/div&gt;</code></pre>
+      <pre><code class="language-css">#door .open, #door .close {
+  display: none;
+}
+#door.opened .open, #door.closed .close {
+  display: block;
+}</code></pre>
+      <pre><code class="language-javascript">function (data) {
+  $('#door').attr('class', data.state);
+}</code></pre>
+      <cite><em>1. How soon we forget</em></cite>
+    </section>
+
+    <section class="slide">
+      <h2>Cascading Walkthrough</h2>
+      <pre><code class="language-markup">&lt;div id="door" class="{{ state }}"&gt;
+  &lt;img class="icon open" /&gt;&lt;!-- default: none, opened: block --&gt;
+  &lt;img class="icon close" /&gt;&lt;!-- default: none, closed: block --&gt;
+  ...
+&lt;/div&gt;</code></pre>
+      <pre><code class="language-css">#door .open, #door .close {
+  display: none;
+}
+#door.opened .open, #door.closed .close {
+  display: block;
+}</code></pre>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Agenda</h2>
+      <ol>
+        <li class="slide-recap"><h4>Writing and structuring CSS better</h4></li>
+        <li><h4>JavaScript that reacts to workflow instead of guiding it</h4></li>
+        <li><h4>How to drive client code with well written server code</h4></li>
+      </ol>
+    </section>
+
+    <section class="slide">
+      <h2>Giving your JavaScript fewer responsibilities</h2>
+      <p>Why would you want to do <em>less</em> on the client side?</p>
+      <div class="slide">
+        <h4>Testing JS is hard</h4>
+        <p>Angular = Grunt + Protractor + Jasmine + Karma + PhantomJS + Selenium...</p>
+      </div>
+      <div class="slide">
+        <h4>Less is more consistent</h4>
+        <p>If you're testing business logic on the server, why test in the browser if you don't have to?</p>
+      </div>
+      <div class="slide">
+        <blockquote>
+          <p>Confidence in executable outcomes increases as lines of code approaches zero.</p>
+          <cite>Chris Missal</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>AJAX &ndash; Part I</h2>
+      <pre><code class="language-javascript">// Initialize the Ajax request
+var xhr = new XMLHttpRequest();
+xhr.open('get', 'send-ajax-data.php');
+ 
+// Track the state changes of the request
+xhr.onreadystatechange = function(){
+    // Ready state 4 means the request is done
+    if(xhr.readyState === 4){
+        // 200 is a successful return
+        if(xhr.status === 200){
+            alert(xhr.responseText); // 'This is the returned text.'
+        }else{
+            alert('Error: '+xhr.status); // An error occurred
+        }
+    }
+}
+ 
+// Send the request to send-ajax-data.php
+xhr.send(null);</code></pre>
+    <small>Code sample stolen from <a href="http://en.wikipedia.org/wiki/Ajax_(programming)">Wikipedia</a></small>
+    </section>
+
+    <section class="slide">
+      <h2>AJAX &ndash; Part II</h2>
+      <pre><code class="language-javascript">$.ajax({
+  type: "GET",
+  url: "/api/endpoint",
+  data: { id: 1024, location: "Austin, TX" }
+  dataType: "json"
+
+}).done(function() {
+  // do something neat
+
+}).fail(function() {
+  // aw crap
+
+});</code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>AJAX &ndash; Part III</h2>
+      <pre><code class="language-javascript">// some setup file
+angular.factory('Cart', function ($resource) {
+  return $resource('/api/cart/:id');
+});
+// a different file, i.e. CartCtrl.js
+var cart = Cart.get(2048);
+</code></pre>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <section class="slide">
+      <h1>TODO</h1>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+<script src="extra/prism.js"></script>
+</body>
+</html>
