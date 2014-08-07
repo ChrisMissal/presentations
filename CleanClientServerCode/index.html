@@ -93,6 +93,19 @@
     </section>
 
     <section class="slide">
+      <h2>What you'll be seeing</h2>
+      <ul>
+        <li><h4>Plain old HTML, CSS, JavaScript</h4></li>
+        <li><h4>jQuery</h4></li>
+        <li><h4>Angular</h4></li>
+        <li><h4>RequireJS</h4></li>
+        <li><h4>C#</h4></li>
+        <li><h4>ASP.NET Web API</h4></li>
+      </ul>
+    </section>
+
+    <!-- //////////////// CSS //////////////// -->
+    <section class="slide">
       <h2>Agenda</h2>
       <ol>
         <li><h4>Writing and structuring CSS better</h4></li>
@@ -160,7 +173,7 @@
       </div>
       <div class="slide">
         <h4>Bundling w/ cache buster (good)</h4>
-        <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/all.css?_=238750958"&gt;</pre></code>
+        <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/all.css?_=198539853"&gt;</pre></code>
       </div>
       <div class="slide">
         <h4>Bundling per version (best)</h4>
@@ -202,18 +215,7 @@
 }</code></pre>
     </section>
 
-    <section class="slide">
-      <h1>TODO</h1>
-    </section>
-
-    <section class="slide">
-      <h1>TODO</h1>
-    </section>
-
-    <section class="slide">
-      <h1>TODO</h1>
-    </section>
-
+    <!-- //////////////// JavaScript //////////////// -->
     <section class="slide">
       <h2>Agenda</h2>
       <ol>
@@ -236,7 +238,7 @@
       </div>
       <div class="slide">
         <blockquote>
-          <p>Confidence in executable outcomes increases as lines of code approaches zero.</p>
+          <p>Confidence in executable outcome increases as lines of code approaches zero.</p>
           <cite>Chris Missal</cite>
         </blockquote>
       </div>
@@ -295,39 +297,110 @@ var cart = Cart.get(2048);
     </section>
 
     <section class="slide">
-      <h1>TODO</h1>
+      <h2>Reducing JavaScript Decisions &ndash; Part I</h2>
+      <pre><code class="language-markup">&lt;div class="message-links"&gt;
+  &lt;a href="/messages/402/delete" class="confirm-action"&gt;Delete 402&lt;/a&gt;
+  &lt;a href="/messages/176/delete" class="confirm-action"&gt;Delete 176&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+      <pre><code class="language-javascript">define(['jquery'], function($) {
+  $('.confirm-action').click(function (e) { // "who"
+    if (!confirm('Delete this message?')) { // how
+      e.preventDefault(); // what
+    }
+  });
+});</code></pre>
     </section>
 
     <section class="slide">
-      <h1>TODO</h1>
+      <h2>Reducing JavaScript Decisions &ndash; Part II</h2>
+      <pre><code class="language-markup">&lt;div class="delete-links"&gt;
+  &lt;a href="/messages/40132/delete"
+     data-confirm="Delete this message?"&gt;Delete 40132&lt;/a&gt;
+
+  &lt;a href="/links/98176/delete"
+     data-confirm="Delete this blog post?"&gt;Delete Blog Post&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+      <pre><code class="language-javascript">define('confirm', ['jquery'], function($) {
+  var setup = function(selector) {
+    $(selector).on('click', function (e) {
+      var message = $(this).data('confirm');
+      if (!confirm(message)) {
+        e.preventDefault();
+      }
+    });
+  };
+  return { init: setup }
+});</code></pre>
+      <pre><code class="language-javascript">require(['confirm'], function (confirm) {
+    confirm.init('.delete-links a');
+});</code></pre>
+    </section>
+
+    <!-- //////////////// Server Side //////////////// -->
+    <section class="slide">
+      <h2>Agenda</h2>
+      <ol>
+        <li class="slide-recap"><h4>Writing and structuring CSS better</h4></li>
+        <li class="slide-recap"><h4>JavaScript that reacts to workflow instead of guiding it</h4></li>
+        <li><h4>How to drive client code with well written server code</h4></li>
+      </ol>
     </section>
 
     <section class="slide">
-      <h1>TODO</h1>
+      <h2>State Enumeration</h2>
+      <pre><code class="language-csharp">public class State : Enumeration&lt;State, string&gt; {
+  private State(int order, string value, string displayName)
+    : base(value, displayName) {
+    Order = order;
+  }
+  public int Order { get; private set; }
+  public State Next {
+    get { return GetAll().FirstOrDefault(x => x.Order == Order + 1); }
+  }
+  public State Previous {
+    get { return GetAll().FirstOrDefault(x => x.Order == Order - 1); }
+  }
+  public decimal Progress {
+    get {
+      return Math.Round((Order - 1m)/(GetAll().Length - 1m), 2)*100m;
+    }
+  }
+}</code></pre>
     </section>
 
     <section class="slide">
-      <h1>TODO</h1>
+      <h2>Cart Controller</h2>
+      <pre><code class="language-csharp">[ActionName("next"), HttpPut]
+public Cart Next(string id) {
+    // if validation passes
+    var cart = _cartProvider.Get(id);
+    cart.State = cart.State.Next;
+    return cart;
+}</code></pre>
+      <pre><code class="language-javascript">angular.module('TheApp').service('Presenter', ['$location', '$cookieStore', function($location, $cookieStore) {
+  this.update = function ($scope, data) {
+    // ...
+    $scope.disableNext = !data.state.next;
+    $scope.disableBack = !data.state.previous;
+    $scope.disableDone = data.state.next;
+    $scope.progressStyle = { 'width': data.state.progress + '%' };
+    // ...
+  }
+}]);</code></pre>
     </section>
 
     <section class="slide">
-      <h1>TODO</h1>
+      <h2>Demo App</h2>
+      <ul>
+        <li><h4>Wizard Form (Checkout process)</h4></li>
+        <li><h4>Let users know their progress.</h4></li>
+        <li><h4>Incrementally &amp; conditionally gather information</h4></li>
+      </ul>
     </section>
 
     <section class="slide">
-      <h1>TODO</h1>
-    </section>
-
-    <section class="slide">
-      <h1>TODO</h1>
-    </section>
-
-    <section class="slide">
-      <h1>TODO</h1>
-    </section>
-
-    <section class="slide">
-      <h1>TODO</h1>
+      <h2>Thanks!</h2>
+      <img src="images/high-five.gif" height="100%" width="100%" />
     </section>
 
     <!-- End slides. -->
