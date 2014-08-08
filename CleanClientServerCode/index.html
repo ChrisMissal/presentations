@@ -120,7 +120,7 @@
     </section>
 
     <section class="slide">
-      <h2>StyleSheets != CSS</h2>
+      <h2>Style Sheets != CSS</h2>
       <div class="slide">
         <h4>CSS != XPath</h4>
         <p>Bad:</p>
@@ -172,7 +172,7 @@
         <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/all.css"&gt;</pre></code>
       </div>
       <div class="slide">
-        <h4>Bundling w/ cache buster (good)</h4>
+        <h4>Bundling w/ cache buster (better)</h4>
         <pre><code class="language-markup">&lt;link rel="stylesheet" href="/content/css/all.css?_=198539853"&gt;</pre></code>
       </div>
       <div class="slide">
@@ -182,7 +182,7 @@
     </section>
 
     <section class="slide">
-      <h2>Cascading<sup>1</sup> Style Sheets</h2>
+      <h2>Cascading Style Sheets</h2>
       <pre><code class="language-markup">&lt;div id="door" class="opened"&gt;
   &lt;img src="icon-open.png" class="icon open" /&gt;
   &lt;img src="icon-close.png" class="icon close" /&gt;
@@ -197,7 +197,6 @@
       <pre><code class="language-javascript">function (data) {
   $('#door').attr('class', data.state);
 }</code></pre>
-      <cite><em>1. How soon we forget</em></cite>
     </section>
 
     <section class="slide">
@@ -347,14 +346,14 @@ var cart = Cart.get(2048);
     </section>
 
     <section class="slide">
-      <h2>A Construction Story</h2>
-      <ul>
-        <li class="slide"><h4>Very Complex KnockoutJS page</h4></li>
-        <li class="slide"><h4>New requirements for incomplete data</h4></li>
-        <li class="slide"><h4>Nearly no JS changes needed!</h4></li>
-      </lu>
+      <h2>State Values in JSON</h2>
+      <pre><code class="language-csharp">State Intro = new State(1, "welcome", "Welcome");
+State EnterName = new State(2, "enter-name", "Enter Your Name");
+State EnterAddress = new State(3, "enter-address", "Enter Your Address");</code></pre>
+      <img src="images/states-json.png" width="50%" class="side-by-side" />
+      <img src="images/more-states-json.png" width="50%" class="side-by-side" />
     </section>
-    
+
     <section class="slide">
       <h2>State Enumeration</h2>
       <pre><code class="language-csharp">public class State : Enumeration&lt;State, string&gt; {

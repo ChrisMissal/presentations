@@ -1,6 +1,9 @@
 .slide-recap {
 	opacity: 0.4;
 }
+.side-by-side {
+	display: inline-block;
+}
 cite {
 	font-size: smaller;
 	font-variant: oblique;
